@@ -1,62 +1,62 @@
-# Previsão de Série Temporal com LSTM
+# Time Series Forecasting with LSTM
 
-## Redes Neurais 2025.1  
+## Neural Networks 2025.1  
 
-Este projeto tem como objetivo realizar previsão do preço de fechamento do Bitcoin utilizando redes neurais do tipo **LSTM (Long Short-Term Memory)**, aplicadas em dados temporais históricos.
-
----
-
-## 📂 Estrutura do Projeto
-
-- `data-bitcoin_timedata_v2.csv` : Conjunto de dados com preços históricos do Bitcoin (`date` e `close`).  
-- `notebook.ipynb` : Notebook principal com todo o pipeline, incluindo análise exploratória, treinamento do modelo LSTM, avaliação e extrapolação.  
-- `best_model_state_dict.pth` : Modelo treinado com o melhor desempenho salvo durante o treino (gerado após execução do notebook).
+This project aims to predict Bitcoin closing prices using **LSTM (Long Short-Term Memory)** neural networks applied to historical time series data.
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## 📂 Project Structure
+
+- `data-bitcoin_timedata_v2.csv` : Dataset with historical Bitcoin prices (`date` and `close`).  
+- `notebook.ipynb` : Main notebook with the full pipeline, including exploratory analysis, LSTM model training, evaluation, and extrapolation.  
+- `best_model_state_dict.pth` : Trained model with the best performance saved during training (generated after running the notebook).
+
+---
+
+## 🛠 Technologies Used
 
 - Python 3.x  
 - Pandas, Numpy  
 - Matplotlib, Seaborn  
-- Statsmodels (análise de autocorrelação e correlação)  
+- Statsmodels (autocorrelation and correlation analysis)  
 - Scikit-learn (MinMaxScaler)  
-- PyTorch (LSTM, treinamento e avaliação)  
-- tqdm (barra de progresso)
+- PyTorch (LSTM, training and evaluation)  
+- tqdm (progress bar)
 
 ---
 
-## 🔍 Pipeline do Projeto
+## 🔍 Project Pipeline
 
-1. **Leitura e pré-processamento dos dados**  
-   - Conversão da coluna `date` para datetime  
-   - Normalização do preço de fechamento (`close`) usando `MinMaxScaler`  
-   - Divisão dos dados em `train`, `valid` e `test`  
+1. **Data Loading and Preprocessing**  
+   - Convert `date` column to datetime  
+   - Normalize closing price (`close`) using `MinMaxScaler`  
+   - Split data into `train`, `valid`, and `test` sets  
 
-2. **Análise exploratória**  
-   - Visualização da série temporal  
-   - Análise de correlação entre defasagens (`lags`)  
-   - Pairplot para visualização conjunta das variáveis defasadas  
+2. **Exploratory Analysis**  
+   - Time series visualization  
+   - Correlation analysis between lags  
+   - Pairplot for joint visualization of lagged variables  
 
-3. **Preparação de dados para LSTM**  
-   - Criação de janelas temporais (`window_size`) para X (features) e y (target)  
-   - Geração de `DataLoaders` para treino, validação e teste  
+3. **Data Preparation for LSTM**  
+   - Create temporal windows (`window_size`) for X (features) and y (target)  
+   - Generate `DataLoaders` for training, validation, and testing  
 
-4. **Modelagem com LSTM**  
-   - Definição da arquitetura LSTM com dropout e camada linear final  
-   - Treinamento com `Adam`, monitoramento da loss e `early stopping`  
-   - Scheduler de taxa de aprendizado opcional (`StepLR`, `CosineAnnealingLR`, etc.)  
+4. **LSTM Modeling**  
+   - Define LSTM architecture with dropout and final linear layer  
+   - Train using `Adam`, monitor loss, and apply `early stopping`  
+   - Optional learning rate scheduler (`StepLR`, `CosineAnnealingLR`, etc.)  
 
-5. **Avaliação do modelo**  
-   - Métricas utilizadas: RMSE, MAE, MAPE  
-   - Visualização de previsões no conjunto de teste (`next day`)  
-   - Extrapolação iterativa para previsão futura
+5. **Model Evaluation**  
+   - Metrics used: RMSE, MAE, MAPE  
+   - Visualize predictions on the test set (`next day`)  
+   - Iterative extrapolation for future forecasting
 
 ---
 
-## ⚙ Configuração do Modelo
+## ⚙ Model Configuration
 
-Exemplo de hiperparâmetros utilizados no projeto:
+Example of hyperparameters used in the project:
 
 ```python
 config = {
